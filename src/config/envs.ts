@@ -11,6 +11,7 @@ interface EnvVars {
   DB_PASSWORD: string;
   DB_NAME: string;
   JWT_SECRET: string;
+  API_KEY_PREFIX: string;
 }
 
 const envsSchema = joi
@@ -24,6 +25,10 @@ const envsSchema = joi
     DB_PASSWORD: joi.string().required(),
     DB_NAME: joi.string().required(),
     JWT_SECRET: joi.string().required(),
+    API_KEY_PREFIX: joi
+      .string()
+      .pattern(/^[a-z0-9]+_$/)
+      .default('argos_'),
   })
   .unknown(true);
 
@@ -43,4 +48,5 @@ export const envs = {
   dbPassword: envVars.DB_PASSWORD,
   dbName: envVars.DB_NAME,
   jwtSecret: envVars.JWT_SECRET,
+  apiKeyPrefix: envVars.API_KEY_PREFIX,
 };

@@ -33,6 +33,15 @@ async function bootstrap() {
     .setTitle('Argos API')
     .setDescription('API para gestión de productos y ventas')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'ApiKey',
+        description: 'Bearer token — API key generated via CLI scripts',
+      },
+      'api-key',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

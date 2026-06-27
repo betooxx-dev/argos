@@ -83,7 +83,9 @@ export class ApiKeysService {
       where: { name, revokedAt: IsNull() },
     });
     if (keys.length === 0)
-      throw new NotFoundException(`No active API keys found with name "${name}"`);
+      throw new NotFoundException(
+        `No active API keys found with name "${name}"`,
+      );
 
     const now = new Date();
     for (const key of keys) {

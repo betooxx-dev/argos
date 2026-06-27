@@ -4,7 +4,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { AppModule } from '@/app.module';
 import { envs } from '@config/index';
-import { TransformInterceptor, AllExceptionsFilter } from '@common/index';
 
 async function bootstrap() {
   const logger = new Logger('Main - Argos API');
@@ -18,14 +17,14 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-  app.useGlobalInterceptors(new TransformInterceptor());
-
-  app.useGlobalFilters(new AllExceptionsFilter());
-
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
+      transform: true,
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
@@ -52,4 +51,4 @@ async function bootstrap() {
   logger.log(`API is running on port: ${envs.port}`);
   logger.log(`Swagger docs available at: http://localhost:${envs.port}/docs`);
 }
-bootstrap();
+void bootstrap();

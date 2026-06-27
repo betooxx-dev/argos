@@ -14,7 +14,7 @@ export class CreateApiKeyDto {
   @IsString()
   @MinLength(3)
   @MaxLength(100)
-  @Matches(/^[a-zA-Z0-9][a-zA-Z0-9 _:\-\.]*$/, {
+  @Matches(/^[a-zA-Z0-9][a-zA-Z0-9 _:.-]*$/, {
     message:
       'name must start with a letter or number and contain only letters, numbers, spaces, underscores, dashes, dots or colons',
   })

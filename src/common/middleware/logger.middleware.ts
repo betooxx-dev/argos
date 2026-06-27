@@ -4,23 +4,23 @@ import { formatDate } from '../utils';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
-    use(req: Request, res: Response, next: NextFunction) {
-        const logger = new Logger('MiddlewareLogger');
+  private readonly logger = new Logger(LoggerMiddleware.name);
 
-        const { method, originalUrl: url, ip } = req;
-        const start = Date.now();
+  use(req: Request, res: Response, next: NextFunction) {
+    const { method, originalUrl: url, ip } = req;
+    const start = Date.now();
 
-        res.on('finish', () => {
-            const { statusCode } = res;
-            const contentLength = res.get('content-length') || 0;
-            const responseTime = Date.now() - start;
-            const timestamp = formatDate(new Date());
+    res.on('finish', () => {
+      const { statusCode } = res;
+      const contentLength = res.get('content-length') || 0;
+      const responseTime = Date.now() - start;
+      const timestamp = formatDate(new Date());
 
-            logger.log(
-                `[${timestamp}] ${method} ${url} - Status: ${statusCode} - Content-Length: ${contentLength} bytes - Response Time: ${responseTime} ms - Client IP: ${ip}`,
-            );
-        });
+      this.logger.log(
+        `[${timestamp}] ${method} ${url} - Status: ${statusCode} - Content-Length: ${contentLength} bytes - Response Time: ${responseTime} ms - Client IP: ${ip}`,
+      );
+    });
 
-        next();
-    }
+    next();
+  }
 }

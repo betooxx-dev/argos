@@ -47,7 +47,9 @@ export class ApiKeyGuard implements CanActivate {
     this.apiKeys
       .update(apiKey.id, { lastUsedAt: new Date() })
       .catch((err) =>
-        this.logger.warn(`Failed to update lastUsedAt for ${apiKey.id}: ${err}`),
+        this.logger.warn(
+          `Failed to update lastUsedAt for ${apiKey.id}: ${err}`,
+        ),
       );
 
     request.apiKey = apiKey;

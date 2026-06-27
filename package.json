@@ -20,7 +20,9 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "api-key:create": "ts-node -r tsconfig-paths/register scripts/api-keys/create.ts",
     "api-key:list": "ts-node -r tsconfig-paths/register scripts/api-keys/list.ts",
-    "api-key:revoke": "ts-node -r tsconfig-paths/register scripts/api-keys/revoke.ts"
+    "api-key:revoke": "ts-node -r tsconfig-paths/register scripts/api-keys/revoke.ts",
+    "blog:seed": "ts-node -r tsconfig-paths/register scripts/blogs/seed.ts",
+    "blog:reset": "ts-node -r tsconfig-paths/register scripts/blogs/reset.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

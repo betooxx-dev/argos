@@ -31,6 +31,8 @@ import { ApiKeysModule } from '@/modules/api-keys/api-keys.module';
       username: envs.dbUser,
       password: envs.dbPassword,
       autoLoadEntities: true,
+      migrations: [__dirname + '/migrations/*{.ts,.js}'],
+      migrationsRun: envs.stage === 'prod',
       synchronize: envs.stage === 'dev',
     }),
     ApiKeysModule,

@@ -1,0 +1,19 @@
+name: guard-typeorm
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  guard-typeorm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:typeorm-safety
+
